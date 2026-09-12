@@ -1,14 +1,14 @@
-import request from 'supertest';
+import { api } from '../helpers/api.js';
 import { expect } from 'chai';
 
 describe('Login', () => {
     it('deve logar com sucesso como Administrador', async () => {
-        const loginResposta = await request('http://localhost:3000')
+        const loginResposta = await api()
             .post('/api/auth/login')
             .set('Content-Type', 'application/json')
             .send({
-                email: 'admin@escola.com',
-                senha: 'admin123'
+                email: process.env.ADMIN_EMAIL,
+                senha: process.env.ADMIN_SENHA
             })
             
         expect(loginResposta.status).to.equal(200);

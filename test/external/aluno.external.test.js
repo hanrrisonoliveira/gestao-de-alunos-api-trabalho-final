@@ -1,20 +1,19 @@
-import request from 'supertest';
-import app from '../../src/app.js';
-import { getToken } from '../helpers/auth.js';
+import { comTokenDeAdmin } from '../helpers/auth.js';
+import { api } from '../helpers/api.js';
 import { expect } from 'chai';
 
 describe('Alunos', () => {
-    let token;
+    let tokenAdmin;
 
     beforeEach(async () => {
-        token = await getToken('admin@escola.com', 'admin123');
+        tokenAdmin = await comTokenDeAdmin();
     })
 
     it('deve cadastrar o aluno com sucesso', async () => {
-        const cadastrarAluno = await request(app)
+        const cadastrarAluno = await api()
             .post('/api/admin/alunos')
             .set('Content-Type', 'application/json')
-            .set('Authorization', `Bearer ${token}`)
+            .set('Authorization', comTokenDeAdmin())
             .send({ 
                 nome: "Hanrrison Oliveira",
                 email: "hanrrison.oliveira@example.com",
