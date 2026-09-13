@@ -1,5 +1,5 @@
 import { api } from '../helpers/api.js';
-import { comTokenDeAdmin } from '../helpers/auth.js';
+import { comTokenDeAdmin, getToken } from '../helpers/auth.js';
 import { expect } from 'chai';
 import { novoAluno } from '../factories/alunosFactory.js';
 import testesDeTrabalho from '../fixtures/trabalho.json' with { type: 'json' };
@@ -7,20 +7,12 @@ import testesDeTrabalho from '../fixtures/trabalho.json' with { type: 'json' };
 describe('Trabalhos', () => {
     it('deve registrar a entrega de um trabalho como aluno', async () => {
         const alunoId = 'aluno-ana-souza';
-        const loginResposta = await api()
-            .post('/api/auth/login')
-            .set('Content-Type', 'application/json')
-            .send({
-                email: 'ana.souza@example.com',
-                senha: '123456'
-            });
-
-        expect(loginResposta.status).to.equal(200);
+        const tokenAluno = await getToken('ana.souza@example.com', '123456');
 
         const registrarTrabalho = await api()
             .post(`/api/alunos/${alunoId}/trabalhos`)
             .set('Content-Type', 'application/json')
-            .set('Authorization', `Bearer ${loginResposta.body.token}`)
+            .set('Authorization', `Bearer ${tokenAluno}`)
             .send({
                 disciplinaId: 'disciplina-matematica',
                 titulo: 'Lista de Exercícios 2',
@@ -55,18 +47,11 @@ describe('Trabalhos', () => {
 
         expect(matricula.status).to.equal(201);
 
-        const login = await api()
-            .post('/api/auth/login')
-            .send({
-                email: aluno.email,
-                senha: aluno.senha
-            });
-
-        expect(login.status).to.equal(200);
+        const tokenAluno = await getToken(aluno.email, aluno.senha);
 
         const entrega = await api()
             .post(`/api/alunos/${alunoId}/trabalhos`)
-            .set('Authorization', `Bearer ${login.body.token}`)
+            .set('Authorization', `Bearer ${tokenAluno}`)
             .send({
                 disciplinaId,
                 titulo: 'Trabalho de Matemática',
