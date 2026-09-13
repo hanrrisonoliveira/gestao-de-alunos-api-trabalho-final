@@ -78,34 +78,31 @@ describe('Trabalhos', () => {
         expect(entrega.body.disciplinaId).to.equal(disciplinaId);
         expect(entrega.body.status).to.equal('entregue');
     });
-
-    describe('DDT - Data Driven Testing', () => {
-        testesDeTrabalho.forEach(testeDeTrabalho => {
-            it(testeDeTrabalho.testTitle, async () => {
-                const loginResposta = await api()
-                    .post('/api/auth/login')
-                    .set('Content-Type', 'application/json')
-                    .send(testeDeTrabalho.dadosAluno);
-
-                expect(loginResposta.status).to.equal(200);
-
-                const alunoId = loginResposta.body.usuario.id;
-
-                const registrarTrabalho = await api()
-                    .post(`/api/alunos/${alunoId}/trabalhos`)
-                    .set('Content-Type', 'application/json')
-                    .set('Authorization', `Bearer ${loginResposta.body.token}`)
-                    .send(testeDeTrabalho.dadosTrabalho);
-
-                expect(registrarTrabalho.status).to.equal(testeDeTrabalho.statusCodeEsperado);
-                expect(registrarTrabalho.body.alunoId).to.equal(alunoId);
-                expect(registrarTrabalho.body.disciplinaId).to.equal(testeDeTrabalho.dadosTrabalho.disciplinaId);
-                expect(registrarTrabalho.body.titulo).to.equal(testeDeTrabalho.dadosTrabalho.titulo);
-                expect(registrarTrabalho.body.status).to.equal(testeDeTrabalho.dadosTrabalho.status);
-            });
-        })
-
-
-    })
-
 });
+
+describe('DDT - Data Driven Testing', () => {
+    testesDeTrabalho.forEach(testeDeTrabalho => {
+        it(testeDeTrabalho.testTitle, async () => {
+            const loginResposta = await api()
+                .post('/api/auth/login')
+                .set('Content-Type', 'application/json')
+                .send(testeDeTrabalho.dadosAluno);
+
+            expect(loginResposta.status).to.equal(200);
+
+            const alunoId = loginResposta.body.usuario.id;
+
+            const registrarTrabalho = await api()
+                .post(`/api/alunos/${alunoId}/trabalhos`)
+                .set('Content-Type', 'application/json')
+                .set('Authorization', `Bearer ${loginResposta.body.token}`)
+                .send(testeDeTrabalho.dadosTrabalho);
+
+            expect(registrarTrabalho.status).to.equal(testeDeTrabalho.statusCodeEsperado);
+            expect(registrarTrabalho.body.alunoId).to.equal(alunoId);
+            expect(registrarTrabalho.body.disciplinaId).to.equal(testeDeTrabalho.dadosTrabalho.disciplinaId);
+            expect(registrarTrabalho.body.titulo).to.equal(testeDeTrabalho.dadosTrabalho.titulo);
+            expect(registrarTrabalho.body.status).to.equal(testeDeTrabalho.dadosTrabalho.status);
+        });
+    })
+})
