@@ -54,3 +54,10 @@ jobs:
 
       - name: Executar testes
         run: npm test
+
+      - name: Upload do relatório Mochawesome
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: relatorio-mochawesome
+          path: mochawesome-report/  
