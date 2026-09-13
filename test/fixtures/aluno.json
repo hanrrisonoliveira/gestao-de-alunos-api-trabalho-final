@@ -1,0 +1,26 @@
+[
+    {
+        "testTitle": "DDT01: deve logar com sucesso como aluno - Bruno Lima",
+        "dadosAluno": {
+            "email": "bruno.lima@example.com",
+            "senha": "123456"
+        },
+        "statusCodeEsperado": 201
+    },
+    {
+        "testTitle": "DDT02: deve logar com sucesso como aluno - Ana Souza",
+        "dadosAluno": {
+            "email": "ana.souza@example.com",
+            "senha": "123456"
+        },
+        "statusCodeEsperado": 201
+    },
+    {
+        "testTitle": "DDT03: deve logar com sucesso como aluno - Carla Mendes",
+        "dadosAluno": {
+            "email": "carla.mendes@example.com",
+            "senha": "123456"
+        },
+        "statusCodeEsperado": 201
+    }
+]

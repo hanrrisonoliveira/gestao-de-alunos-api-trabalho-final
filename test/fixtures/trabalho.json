@@ -1,0 +1,44 @@
+[
+    {
+        "testTitle": "DDT01: deve registrar a entrega de um trabalho com o aluno Bruno Lima",
+        "dadosAluno": {
+            "email": "bruno.lima@example.com",
+            "senha": "123456"
+        },
+        "dadosTrabalho": {
+            "disciplinaId": "disciplina-historia",
+            "titulo": "História",
+            "descricao": "Napoleão Bonaparte",
+            "status": "entregue"
+        },
+        "statusCodeEsperado": 201
+    },
+    {
+        "testTitle": "DDT02: deve registrar a entrega de um trabalho com o aluno Ana Souza",
+        "dadosAluno": {
+            "email": "ana.souza@example.com",
+            "senha": "123456"
+        },
+        "dadosTrabalho": {
+            "disciplinaId": "disciplina-matematica",
+            "titulo": "Matemática",
+            "descricao": "Lista de Exercícios 2",
+            "status": "entregue"
+        },
+        "statusCodeEsperado": 201
+    },
+    {
+        "testTitle": "DDT03: deve registrar a entrega de um trabalho com o aluno Carla Mendes",
+        "dadosAluno": {
+            "email": "carla.mendes@example.com",
+            "senha": "123456"
+        },
+        "dadosTrabalho": {
+            "disciplinaId": "disciplina-programacao-web",
+            "titulo": "Programação Web",
+            "descricao": "Landing Page Responsiva 2",
+            "status": "entregue"
+        },
+        "statusCodeEsperado": 201
+    }
+]
